@@ -15,6 +15,7 @@ public class HumanityMenu {
 	private static final String STAFF = "//p[contains(text(),'Staff')]";
 	private static final String PAYROLL = "//p[contains(text(),'Payroll')]";
 	private static final String REPORTS = "//p[contains(text(),'Reports')]";
+	private static final String SETTINGS="//i[@class='primNavQtip__icon icon-gear']";
 
 	// Dashboard
 	public static WebElement getDashboard(WebDriver driver) {
@@ -86,6 +87,14 @@ public class HumanityMenu {
 
 	public static void clickReports(WebDriver driver) {
 		getReports(driver).click();
+	}
+	//Settings
+	public static WebElement getSettings(WebDriver driver) {
+		return driver.findElement(By.xpath(SETTINGS));
+	}
+
+	public static void clickSettings(WebDriver driver) {
+		getSettings(driver).click();
 	}
 
 }

@@ -1,5 +1,8 @@
 package page.objects;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -11,7 +14,10 @@ public class HumanityStaff {
 		private static final String ADD = "//button[@id='act_primary']";
 		private static final String SAVE="//button[@id='_as_save_multiple']";
 		private static final String ALLEMP="//a[contains(text(),'All Staff')]";
-		
+		private static final String EMP="//a[@class='staff-employee']";
+		//private static String EMPX = "//a[contains(text(),'";
+		//private static String EMPX_END = "')]";
+		//private static String TABLE = "//table[contains(@class,'employeesList')]//tbody";
 
 		// click AddEmployee
 		public static WebElement getAddNew(WebDriver driver) {
@@ -80,9 +86,16 @@ public class HumanityStaff {
 		public static void clickAllEmp(WebDriver driver) {
 			getAll(driver).click();
 		}
-		public static WebElement getEmp(WebDriver driver) {
-			return driver.findElement(By.className("//a[contains(text(),'Ime-1287066345 Prezime-282264966')]"));
+		//public static WebElement getEmp(WebDriver driver) {
+		//	return driver.findElement(By.xpath("//a[contains(text(),'Ime-1287066345 Prezime-282264966')]"));
+		//}
+		public static WebElement getZap(WebDriver driver) {
+			return driver.findElement(By.xpath(EMP));
 		}
 
+		public static void clickEmp(WebDriver driver) {
+			getZap(driver).click();
+		}
+	
 		
 }
