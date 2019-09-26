@@ -37,5 +37,11 @@ package page.objects;
 		public static void clickLogIn(WebDriver driver) {
 			getLogIn(driver).click();
 		}
+		public static boolean logIN(WebDriver driver, String email, String password) {
+			inputEmail(driver, email);
+			inputPassword(driver, password);
+			clickLogIn(driver);
+			return true;
+		}
 		
 }

@@ -1,7 +1,5 @@
 package page.tests;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -10,30 +8,29 @@ import org.testng.annotations.Test;
 
 import page.objects.HumanityHome;
 import page.objects.HumanityMenu;
-
+import page.objects.HumanitySettings;
 import page.objects.LogIn;
-import utility.ExcelUtils;
 
-
-public class HumanityLoginTest {
+public class SettingsTest {
 	@Test
-	public void HumanityLogIn() throws InterruptedException {
+	public void OpcijeSettings() throws InterruptedException {
 
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-		
+
 		driver.get(HumanityHome.URL);
 		driver.manage().window().maximize();
-		
-		
+
 		HumanityHome.clickLogin(driver);
 		LogIn.logIN(driver, "sama@coin-host.net", "blabla1");
 		
+		HumanityMenu.clickSettings(driver);
+		HumanitySettings.inputCountry(driver, "Serbia");
+		HumanitySettings.inputLanguage(driver, "Serbian (machine)");
+		HumanitySettings.inputTimeFormat(driver, "24 hour");
 		Thread.sleep(5000);
-		assertEquals(driver.getCurrentUrl(), HumanityMenu.URL);
 		driver.close();
 
 	}
-
 }

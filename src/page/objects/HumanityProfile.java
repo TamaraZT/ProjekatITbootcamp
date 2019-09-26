@@ -10,12 +10,20 @@ public class HumanityProfile {
 	private static final String PROFILE="//a[contains(text(),'Profile')]";
 	private static final String AVAILABILITY="//div[@class='userm userm-mainPage']//a[contains(text(),'Availability')]";
 	private static final String VERSION="//b[contains(text(),'9.5.5')]";
+	private static final String SIGNOUT="//a[contains(text(),'Sign Out')]";
 	//drop down meni za profil
 	public static WebElement getProfile(WebDriver driver) {
 		return driver.findElement(By.xpath(ACCOUNT));
 	}
 	public static void clickProfileDropDown(WebDriver driver) {
 		getProfile(driver).click();
+	}
+	//sign out
+	public static WebElement getSignOut(WebDriver driver) {
+		return driver.findElement(By.xpath(SIGNOUT));
+	}
+	public static void clickSignOut(WebDriver driver) {
+		getSignOut(driver).click();
 	}
 	//za Settings
 	public static WebElement getSettings(WebDriver driver) {
@@ -40,13 +48,12 @@ public class HumanityProfile {
 	}
 	//Za verziju
 	public static WebElement getVersion(WebDriver driver) {
-		return driver.findElement(By.xpath("//div[@id='humanityAppVersion']"));
+		return driver.findElement(By.id("humanityAppVersion"));
 	}
 	public static WebElement clickVersion(WebDriver driver) {
-		return getVersion(driver).findElement(By.tagName("a"));
+		return getVersion(driver).findElement(By.tagName("b"));
 	}
 	public static String verzija(WebDriver driver) {
 		return clickVersion(driver).getText();
 	}
-	
 }
