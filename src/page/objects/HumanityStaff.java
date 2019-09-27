@@ -15,8 +15,8 @@ public class HumanityStaff {
 		private static final String SAVE="//button[@id='_as_save_multiple']";
 		private static final String ALLEMP="//a[contains(text(),'All Staff')]";
 		private static final String EMP="//a[@class='staff-employee']";
-		//private static String EMPX = "//a[contains(text(),'";
-		//private static String EMPX_END = "')]";
+		private static String EMPX = "//a[contains(text(),'";
+		private static String EMPX_END = "')]";
 		private static String TABLE = "//table[contains(@class,'employeesList')]//tbody";
 
 		// click AddEmployee
@@ -79,6 +79,8 @@ public class HumanityStaff {
 		public static void clickSaveEmp(WebDriver driver) {
 			getSave(driver).click();
 		}
+		
+		
 		public static WebElement getAll(WebDriver driver) {
 			return driver.findElement(By.xpath(ALLEMP));
 		}
@@ -86,20 +88,30 @@ public class HumanityStaff {
 		public static void clickAllEmp(WebDriver driver) {
 			getAll(driver).click();
 		}
-		
-		//Lista za proveru da li ima zaposlenog
-		public static List<String> getList(WebDriver driver) {
-			List<WebElement> webList = driver.findElement(By.xpath(TABLE)).findElements(By.className("staff-employee"));
-			List<String> strList = new ArrayList<String>();
-			for(WebElement e:webList) {
-				strList.add(e.getAttribute("innerHTML"));
-			}
-			return strList;
+		//employee by name
+		public static void editEmployee(WebDriver driver, String name) {
+			driver.findElement(By.xpath(EMPX + name + EMPX_END)).click();
 		}
 		public static boolean findEmp(WebDriver driver, String name) {
-			return getList(driver).contains(name+" ");
+			driver.findElement(By.xpath(EMPX + name + EMPX_END)).isDisplayed();
+			return true;
 		}
-		//Zaposleni
+		//List of employees
+		public static List<String> getList(WebDriver driver) {
+			List<WebElement> list = driver.findElement(By.xpath(TABLE))
+					.findElements(By.className("staff-employee"));
+			List<String> listE = new ArrayList<String>();
+			for (WebElement we : list) {
+				listE.add(we.getAttribute("innerHTML"));
+			}
+			return listE;
+		}
+		//Is the name in the list
+		public static boolean employee(WebDriver driver, String name) {
+			getList(driver).contains(name + " ");
+			return true;
+		}
+		//Employee
 		public static WebElement getZap(WebDriver driver) {
 			return driver.findElement(By.xpath(EMP));
 		}
@@ -107,7 +119,7 @@ public class HumanityStaff {
 		public static void clickEmp(WebDriver driver) {
 			getZap(driver).click();
 		}
-		//celokupan ispis za zaposlenog i dodaje se broj pre emaila da bi email bio razliciti
+		//all employees add an int i for a different email
 		public static boolean addEmployee(WebDriver driver,int i, int broj, String ime, String prezime, String mail) {
 			inputIme(driver, i, ime);
 			inputSur(driver, i, prezime);
